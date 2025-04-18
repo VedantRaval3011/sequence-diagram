@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sequence Diagram</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="sequence-diagram">
+        <!-- Participants -->
+        <div class="participant" id="user">User</div>
+        <div class="participant" id="frontend">Frontend (Paw Protector UI)</div>
+        <div class="participant" id="backend">Backend Server</div>
+        <div class="participant" id="database">Database</div>
+        <div class="participant" id="payment">Payment Gateway</div>
+
+        <!-- Lifelines -->
+        <div class="lifeline" id="user-line"></div>
+        <div class="lifeline" id="frontend-line"></div>
+        <div class="lifeline" id="backend-line"></div>
+        <div class="lifeline" id="database-line"></div>
+        <div class="lifeline" id="payment-line"></div>
+
+        <!-- Messages -->
+        <!-- Browsing Products -->
+        <div class="message" data-from="user" data-to="frontend" style="top: 70px;">Browse products</div>
+        <div class="message return" data-from="frontend" data-to="user" style="top: 110px;">Display products</div>
+        <div class="message" data-from="frontend" data-to="backend" style="top: 150px;">Request product list</div>
+        <div class="message" data-from="backend" data-to="database" style="top: 190px;">Query available products</div>
+        <div class="message return" data-from="database" data-to="backend" style="top: 230px;">Return product list</div>
+        <div class="message return" data-from="backend" data-to="frontend" style="top: 270px;">Send product list</div>
+
+        <!-- Add to Cart -->
+        <div class="message" data-from="user" data-to="frontend" style="top: 310px;">Add product to cart</div>
+        <div class="message" data-from="frontend" data-to="backend" style="top: 350px;">Add item to cart (User_id, Product_id, Quantity)</div>
+        <div class="message" data-from="backend" data-to="database" style="top: 390px;">Update cart (store cart items)</div>
+        <div class="message return" data-from="database" data-to="backend" style="top: 430px;">Confirm cart update</div>
+        <div class="message return" data-from="backend" data-to="frontend" style="top: 470px;">Confirm item added</div>
+        <div class="message return" data-from="frontend" data-to="user" style="top: 510px;">Show updated cart</div>
+
+        <!-- Checkout -->
+        <div class="message" data-from="user" data-to="frontend" style="top: 550px;">Proceed to checkout</div>
+        <div class="message" data-from="frontend" data-to="backend" style="top: 590px;">Request cart details</div>
+        <div class="message" data-from="backend" data-to="database" style="top: 630px;">Fetch cart items (User_id)</div>
+        <div class="message return" data-from="database" data-to="backend" style="top: 670px;">Return cart items</div>
+        <div class="message return" data-from="backend" data-to="frontend" style="top: 710px;">Send cart details</div>
+        <div class="message return" data-from="frontend" data-to="user" style="top: 750px;">Display checkout page (cart items, total amount)</div>
+
+        <!-- Payment -->
+        <div class="message" data-from="user" data-to="frontend" style="top: 790px;">Enter shipping address and payment details</div>
+        <div class="message" data-from="frontend" data-to="backend" style="top: 830px;">Submit order (User_id, Ship_address, Card_no, Total_amount)</div>
+        <div class="message" data-from="backend" data-to="database" style="top: 870px;">Verify product availability</div>
+        <div class="message return" data-from="database" data-to="backend" style="top: 910px;">Confirm availability</div>
+        <div class="message" data-from="backend" data-to="payment" style="top: 950px;">Initiate payment (Card_no, Total_amount)</div>
+        <div class="message return" data-from="payment" data-to="backend" style="top: 990px;">Payment success/failure</div>
+
+        <!-- Payment Success -->
+        <div class="alt" style="top: 1030px;">alt Payment Success</div>
+        <div class="message" data-from="backend" data-to="database" style="top: 1070px;">Create order (Order_id, User_id, Order_items, Total_amount, Status)</div>
+        <div class="message return" data-from="database" data-to="backend" style="top: 1110px;">Confirm order creation</div>
+        <div class="message" data-from="backend" data-to="database" style="top: 1150px;">Update product inventory</div>
+        <div class="message return" data-from="database" data-to="backend" style="top: 1190px;">Confirm inventory update</div>
+        <div class="message return" data-from="backend" data-to="frontend" style="top: 1230px;">Confirm order placed</div>
+        <div class="message return" data-from="frontend" data-to="user" style="top: 1270px;">Display order confirmation</div>
+        <div class="end" style="top: 1310px;">end</div>
+
+        <!-- Payment Failure -->
+        <div class="else" style="top: 1350px;">else Payment Failure</div>
+        <div class="message" data-from="backend" data-to="frontend" style="top: 1390px;">Notify payment failure</div>
+        <div class="message return" data-from="frontend" data-to="user" style="top: 1430px;">Display payment error</div>
+        <div class="end" style="top: 1470px;">end</div>
+    </div>
+</body>
+</html>

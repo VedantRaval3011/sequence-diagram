@@ -141,3 +141,92 @@
     transform: scale(1.05);
     transition: transform 0.2s;
 }
+
+/* Responsive Design for Phones (max-width: 768px) */
+@media (max-width: 768px) {
+    .sequence-diagram {
+        height: auto;
+        min-height: 1600px;
+        overflow-x: hidden;
+    }
+
+    .participant {
+        position: relative;
+        display: block;
+        width: 80%;
+        margin: 10px auto;
+        top: auto;
+        left: auto;
+    }
+
+    #user { order: 1; }
+    #frontend { order: 2; }
+    #backend { order: 3; }
+    #database { order: 4; }
+    #payment { order: 5; }
+
+    .lifeline {
+        position: absolute;
+        top: 60px;
+        bottom: 0;
+        width: 2px;
+        background-color: #333;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    #user-line { top: 110px; }
+    #frontend-line { top: 170px; }
+    #backend-line { top: 230px; }
+    #database-line { top: 290px; }
+    #payment-line { top: 350px; }
+
+    .message {
+        position: relative;
+        margin: 20px auto;
+        left: 0;
+        right: 0;
+        width: 80%;
+        max-width: 300px;
+        font-size: 12px;
+        padding: 8px 15px;
+    }
+
+    .message::before {
+        left: 5px;
+        border-right: 8px solid #4a90e2;
+    }
+
+    .message::after {
+        right: 5px;
+        border-left: 8px solid #e6f3ff;
+    }
+
+    .return::before {
+        border-right-color: #28a745;
+    }
+
+    .return::after {
+        border-left-color: #d4edda;
+    }
+
+    .message[data-from="user"][data-to="frontend"],
+    .message[data-from="frontend"][data-to="user"],
+    .message[data-from="frontend"][data-to="backend"],
+    .message[data-from="backend"][data-to="frontend"],
+    .message[data-from="backend"][data-to="database"],
+    .message[data-from="database"][data-to="backend"],
+    .message[data-from="backend"][data-to="payment"],
+    .message[data-from="payment"][data-to="backend"] {
+        left: 10%;
+        right: 10%;
+    }
+
+    .alt, .else, .end {
+        width: 80%;
+        left: 10%;
+        right: 10%;
+        margin: 20px auto;
+        font-size: 12px;
+    }
+}
